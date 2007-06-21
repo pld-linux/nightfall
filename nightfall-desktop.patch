@@ -1,0 +1,20 @@
+--- nightfall-1.62/nightfall.desktop~	2007-06-22 00:26:08.000000000 +0200
++++ nightfall-1.62/nightfall.desktop	2007-06-22 00:25:03.000000000 +0200
+@@ -1,9 +1,14 @@
+ [Desktop Entry]
+ Name=Nightfall
+ Name[de]=Nightfall
++Name[pl]=Nightfall
+ Comment=Eclipsing Binary Star Program
+-Comment[de]=Programm für Bedeckungsveränderliche Sterne
++Comment[de]=Programm fï¿½r Bedeckungsverï¿½nderliche Sterne
++Comment[pl]=Aplikacja atronomiczna
+ Exec=nightfall -U 0.8 85 0.6 1.0 5500 5300
+-Icon=gnome-nightfall.png
+-Terminal=0
++Icon=nightfall.xpm
++Terminal=false
+ Type=Application
++Categories=Qt;KDE;Education;Science;Astronomy;
++Encoding=UTF-8
++# vi: encoding=utf-8
