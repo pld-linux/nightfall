@@ -9,8 +9,9 @@ Source0:	http://www.la-samhna.de/nightfall/%{name}-%{version}.tar.gz
 # Source0-md5:	318314e97b83fdb74860aba6adef219b
 Patch0:		%{name}-desktop.patch
 URL:		http://www.hs.uni-hamburg.de/DE/Ins/Per/Wichmann/Nightfall.html
-BuildRequires:	gnuplot
+#BuildRequires:	gnuplot
 BuildRequires:	gtk+-devel
+Requires:	gnuplot
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -31,7 +32,8 @@ zestawu danych obserwacyjnych.
 %patch0 -p1
 
 %build
-%configure
+%configure \
+	--with-gnuplot
 %{__make}
 
 %install
