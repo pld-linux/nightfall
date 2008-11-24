@@ -1,12 +1,12 @@
 Summary:	An astronomy application
 Summary(pl.UTF-8):	Aplikacja astronomiczna
 Name:		nightfall
-Version:	1.62
-Release:	1
+Version:	1.66
+Release:	0.1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://www.la-samhna.de/nightfall/%{name}-%{version}.tar.gz
-# Source0-md5:	318314e97b83fdb74860aba6adef219b
+# Source0-md5:	e800ebbc87f460379ae7029d70509ac1
 Patch0:		%{name}-desktop.patch
 URL:		http://www.hs.uni-hamburg.de/DE/Ins/Per/Wichmann/Nightfall.html
 BuildRequires:	OpenGL-GLU-devel
@@ -17,8 +17,8 @@ BuildRequires:	libgnomeui-devel >= 2.0
 BuildRequires:	libjpeg-devel
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.198
-BuildRequires:	scrollkeeper
-Requires(post,postun):	scrollkeeper
+BuildRequires:	rarian
+Requires(post,postun):	rarian
 Requires:	gnuplot
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -54,18 +54,17 @@ install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 install %{name}.desktop $RPM_BUILD_ROOT%{_desktopdir}
 install %{name}.xpm $RPM_BUILD_ROOT%{_pixmapsdir}
 
-%find_lang %{name} --all-name
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+# not sure about this
 %post
-%scrollkeeper_update_post
+%rarian_update_post
 
 %postun
-%scrollkeeper_update_postun
+%rarian_update_postun
 
-%files -f %{name}.lang
+%files
 %defattr(644,root,root,755)
 %doc AUTHORS README doc/*
 %attr(755,root,root) %{_bindir}/*
