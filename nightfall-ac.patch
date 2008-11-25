@@ -1,0 +1,74 @@
+--- nightfall-1.66/acinclude.m4.orig	2008-11-24 16:56:04.062652985 +0100
++++ nightfall-1.66/acinclude.m4	2008-11-24 16:56:10.062240646 +0100
+@@ -40,41 +40,6 @@
+ 
+ # serial 1
+ 
+-dnl Usage:
+-dnl AM_INIT_AUTOMAKE(package,version, [no-define])
+-
+-AC_DEFUN(AM_INIT_AUTOMAKE,
+-[AC_REQUIRE([AM_PROG_INSTALL])
+-PACKAGE=[$1]
+-AC_SUBST(PACKAGE)
+-VERSION=[$2]
+-AC_SUBST(VERSION)
+-dnl test to see if srcdir already configured
+-if test "`cd $srcdir && pwd`" != "`pwd`" && test -f $srcdir/config.status; then
+-  AC_MSG_ERROR([source directory already configured; run "make distclean" there first])
+-fi
+-ifelse([$3],,
+-AC_DEFINE_UNQUOTED(PACKAGE, "$PACKAGE")
+-AC_DEFINE_UNQUOTED(VERSION, "$VERSION"))
+-AC_REQUIRE([AM_SANITY_CHECK])
+-AC_REQUIRE([AC_ARG_PROGRAM])
+-dnl FIXME This is truly gross.
+-missing_dir=`cd $ac_aux_dir && pwd`
+-AM_MISSING_PROG(ACLOCAL, aclocal, $missing_dir)
+-AM_MISSING_PROG(AUTOCONF, autoconf, $missing_dir)
+-AM_MISSING_PROG(AUTOMAKE, automake, $missing_dir)
+-AM_MISSING_PROG(AUTOHEADER, autoheader, $missing_dir)
+-AM_MISSING_PROG(MAKEINFO, makeinfo, $missing_dir)
+-AC_REQUIRE([AC_PROG_MAKE_SET])])
+-
+-
+-# serial 1
+-
+-AC_DEFUN(AM_PROG_INSTALL,
+-[AC_REQUIRE([AC_PROG_INSTALL])
+-test -z "$INSTALL_SCRIPT" && INSTALL_SCRIPT='${INSTALL_PROGRAM}'
+-AC_SUBST(INSTALL_SCRIPT)dnl
+-])
+ 
+ #
+ # Check to make sure that the build environment is sane.
+@@ -422,3 +387,13 @@
+ 
+ 
+ 
++dnl AC_LANG_C_AND_F77()
++AC_DEFUN(AC_LANG_C_AND_F77,
++[define([AC_LANG], [C])dnl
++ac_ext=c
++# CFLAGS is not in ac_cpp because -g, -O, etc. are not valid cpp options.
++ac_cpp='$CPP $CPPFLAGS'
++ac_compile='${CC-cc} -c $CFLAGS $CPPFLAGS conftest.$ac_ext 1>&AC_FD_CC'
++ac_link='${F77-f77} -o conftest${ac_exeext} $CFLAGS $FFLAGS $LDFLAGS conftest.$ac_ext $LIBS 1>&AC_FD_CC'
++cross_compiling=$ac_cv_prog_cc_cross
++])
+--- nightfall-1.66/configure.ac.orig	2008-11-24 17:13:11.992005742 +0100
++++ nightfall-1.66/configure.ac	2008-11-24 17:15:00.984514934 +0100
+@@ -23,9 +23,12 @@
+ dnl i18n stuff
+ ALL_LINGUAS="de it"
+ 
++GETTEXT_PACKAGE=nightfall
++AC_SUBST([GETTEXT_PACKAGE])
++AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE],["$GETTEXT_PACKAGE"],[Gettext package])
+ AM_GNU_GETTEXT
+ 
+-
++IT_PROG_INTLTOOL
+ 
+ dnl
+ dnl check for gnome
