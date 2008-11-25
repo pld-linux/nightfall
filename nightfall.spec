@@ -1,6 +1,3 @@
-#
-# TODO: use autotools with intltool and maybe gettext to restore language files
-#
 Summary:	An astronomy application
 Summary(pl.UTF-8):	Aplikacja astronomiczna
 Name:		nightfall
@@ -11,11 +8,16 @@ Group:		X11/Applications
 Source0:	http://www.la-samhna.de/nightfall/%{name}-%{version}.tar.gz
 # Source0-md5:	e800ebbc87f460379ae7029d70509ac1
 Patch0:		%{name}-desktop.patch
+Patch1:		%{name}-ac.patch
 URL:		http://www.hs.uni-hamburg.de/DE/Ins/Per/Wichmann/Nightfall.html
 BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	OpenGL-glut-devel
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 2:2.6
 BuildRequires:	gtkglarea-devel >= 1.99
+BuildRequires:	intltool
 BuildRequires:	libgnomeui-devel >= 2.0
 BuildRequires:	libjpeg-devel
 BuildRequires:	pkgconfig
@@ -41,8 +43,13 @@ zestawu danych obserwacyjnych.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
+%{__gettextize}
+%{__intltoolize}
+%{__aclocal}
+%{__autoconf}
 %configure \
 	--with-gnuplot
 %{__make}
@@ -57,6 +64,8 @@ install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 install %{name}.desktop $RPM_BUILD_ROOT%{_desktopdir}
 install %{name}.xpm $RPM_BUILD_ROOT%{_pixmapsdir}
 
+%find_lang %{name} --all-name
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -66,7 +75,7 @@ rm -rf $RPM_BUILD_ROOT
 %postun
 %scrollkeeper_update_postun
 
-%files
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS README doc/*
 %attr(755,root,root) %{_bindir}/*
