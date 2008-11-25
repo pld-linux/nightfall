@@ -1,3 +1,6 @@
+#
+# TODO: use autotools with intltool and maybe gettext to restore language files
+#
 Summary:	An astronomy application
 Summary(pl.UTF-8):	Aplikacja astronomiczna
 Name:		nightfall
@@ -16,9 +19,9 @@ BuildRequires:	gtkglarea-devel >= 1.99
 BuildRequires:	libgnomeui-devel >= 2.0
 BuildRequires:	libjpeg-devel
 BuildRequires:	pkgconfig
+BuildRequires:	rarian-compat
 BuildRequires:	rpmbuild(macros) >= 1.198
-BuildRequires:	rarian
-Requires(post,postun):	rarian
+Requires(post,postun):	rarian-compat
 Requires:	gnuplot
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -57,12 +60,11 @@ install %{name}.xpm $RPM_BUILD_ROOT%{_pixmapsdir}
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-# not sure about this
 %post
-%rarian_update_post
+%scrollkeeper_update_post
 
 %postun
-%rarian_update_postun
+%scrollkeeper_update_postun
 
 %files
 %defattr(644,root,root,755)
