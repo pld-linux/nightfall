@@ -1,12 +1,12 @@
 Summary:	An astronomy application
 Summary(pl.UTF-8):	Aplikacja astronomiczna
 Name:		nightfall
-Version:	1.66
+Version:	1.68
 Release:	0.1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://www.la-samhna.de/nightfall/%{name}-%{version}.tar.gz
-# Source0-md5:	e800ebbc87f460379ae7029d70509ac1
+# Source0-md5:	bdfeafab4cfb45aad476af55f585c598
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-ac.patch
 URL:		http://www.hs.uni-hamburg.de/DE/Ins/Per/Wichmann/Nightfall.html
