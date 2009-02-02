@@ -21,9 +21,9 @@ BuildRequires:	intltool
 BuildRequires:	libgnomeui-devel >= 2.0
 BuildRequires:	libjpeg-devel
 BuildRequires:	pkgconfig
-BuildRequires:	rarian-compat
 BuildRequires:	rpmbuild(macros) >= 1.198
-Requires(post,postun):	rarian-compat
+BuildRequires:	scrollkeeper
+Requires(post,postun):	scrollkeeper
 Requires:	gnuplot
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
