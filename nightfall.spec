@@ -14,7 +14,7 @@ BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	OpenGL-glut-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 BuildRequires:	gtk+2-devel >= 2:2.6
 BuildRequires:	gtkglarea-devel >= 1.99
 BuildRequires:	intltool
